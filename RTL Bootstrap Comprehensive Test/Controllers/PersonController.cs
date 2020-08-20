@@ -36,6 +36,10 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         public ActionResult Details(int id)
         {
             var personModel = new PersonDA().GetPerson(id);
+            if (personModel == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             PersonVM personVM = new PersonVM()
             {
                 Id = personModel.Id,
@@ -93,6 +97,10 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         public ActionResult Edit(int id)
         {
             var personModel = new PersonDA().GetPerson(id);
+            if (personModel == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             PersonVM personVM = new PersonVM()
             {
                 Id = personModel.Id,
@@ -107,11 +115,11 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         // POST: PersonController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, [FromForm] PersonVM submittedPerson)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                
             }
             catch
             {
