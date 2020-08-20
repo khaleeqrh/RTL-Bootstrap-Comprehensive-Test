@@ -119,7 +119,29 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         {
             try
             {
-                
+                if (ModelState.IsValid)
+                {
+                    var personModel = new PersonModel()
+                    {
+                        Id = id,
+                        FirstName = submittedPerson.FirstName,
+                        LastName = submittedPerson.LastName,
+                        EmailAddress = submittedPerson.EmailAddress,
+                    };
+                    var res = new PersonDA().UpdatePerson(personModel);
+                    if (res == 1) //  means one row effected. which is updated
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
