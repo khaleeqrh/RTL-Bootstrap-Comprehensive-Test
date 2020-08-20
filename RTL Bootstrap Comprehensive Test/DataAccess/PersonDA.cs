@@ -42,6 +42,33 @@ namespace RTL_Bootstrap_Comprehensive_Test.DataAccess
             }
         }
 
+        public int UpdatePerson(PersonModel person)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(getConnectionString()))
+            {
+                return cnn.Execute("UPDATE PERSON SET FirstName= @FirstName, LastName=@LastName, EmailAddress=@EmailAddress WHERE Id=@Id;", person);
+            }
+        }
+
+
+        public int DeletePerson(PersonModel person)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(getConnectionString()))
+            {
+                return cnn.Execute("DELETE FROM PERSON WHERE Id=@Id;", person);
+            }
+        }
+
+        public int DeletePerson(int personId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(getConnectionString()))
+            {
+                return cnn.Execute("DELETE FROM PERSON WHERE Id=@Id;", new { Id = personId});
+            }
+        }
+
+
+
 
 
 
