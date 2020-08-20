@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RTL_Bootstrap_Comprehensive_Test.DataAccess;
+using RTL_Bootstrap_Comprehensive_Test.ViewModels;
 
 namespace RTL_Bootstrap_Comprehensive_Test.Controllers
 {
@@ -12,7 +15,20 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         // GET: PersonController
         public ActionResult Index()
         {
-            return View();
+            var personVMList = new List<PersonVM>();
+            var personList = new PersonDA().GetPersons();
+            foreach (var person in personList)
+            {
+                personVMList.Add(new PersonVM() { 
+                    Id = person.Id, 
+                    FirstName = person.FirstName, 
+                    LastName=person.LastName,
+                    EmailAddress=person.EmailAddress, 
+                    CreatedOn=person.CreatedOn
+                });
+            }
+
+            return View(personVMList);
         }
 
         // GET: PersonController/Details/5
