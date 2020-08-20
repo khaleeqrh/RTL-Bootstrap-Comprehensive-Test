@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>List of Persons</h1>
+<h1>قائمة الأشخاص</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-secondary">Create New</a>
+    <a asp-action="Create" class="btn btn-secondary">خلق جديد إبداع جديد</a>
 </p>
 <table class="table">
     <thead>
@@ -53,9 +53,9 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id  }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("تعديل", "Edit", new { id=item.Id  }) |
+                @Html.ActionLink("تفاصيل", "Details", new { id = item.Id }) |
+                @Html.ActionLink("حذف", "Delete", new { id = item.Id })
             </td>
         </tr>
 }
