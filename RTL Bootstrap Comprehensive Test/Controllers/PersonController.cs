@@ -35,7 +35,16 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         // GET: PersonController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var personModel = new PersonDA().GetPerson(id);
+            PersonVM personVM = new PersonVM()
+            {
+                Id = personModel.Id,
+                FirstName = personModel.FirstName,
+                LastName = personModel.LastName,
+                EmailAddress = personModel.EmailAddress,
+                CreatedOn = personModel.CreatedOn
+            };
+            return View(personVM);
         }
 
         // GET: PersonController/Create
@@ -83,7 +92,16 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         // GET: PersonController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var personModel = new PersonDA().GetPerson(id);
+            PersonVM personVM = new PersonVM()
+            {
+                Id = personModel.Id,
+                FirstName = personModel.FirstName,
+                LastName = personModel.LastName,
+                EmailAddress = personModel.EmailAddress,
+                CreatedOn = personModel.CreatedOn
+            };
+            return View(personVM);
         }
 
         // POST: PersonController/Edit/5
