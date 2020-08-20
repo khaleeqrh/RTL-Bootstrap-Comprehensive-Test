@@ -152,7 +152,20 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         // GET: PersonController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var personModel = new PersonDA().GetPerson(id);
+            if (personModel == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            PersonVM personVM = new PersonVM()
+            {
+                Id = personModel.Id,
+                FirstName = personModel.FirstName,
+                LastName = personModel.LastName,
+                EmailAddress = personModel.EmailAddress,
+                CreatedOn = personModel.CreatedOn
+            };
+            return View(personVM);
         }
 
         // POST: PersonController/Delete/5
