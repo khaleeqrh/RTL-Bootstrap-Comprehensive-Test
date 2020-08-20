@@ -171,11 +171,19 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         // POST: PersonController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, [FromForm] PersonVM submittedPerson)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var res = new PersonDA().DeletePerson(id);
+                if (res == 1) //  means one row effected. which is deleted
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
