@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RTL_Bootstrap_Comprehensive_Test.DataAccess;
+using RTL_Bootstrap_Comprehensive_Test.Models;
 using RTL_Bootstrap_Comprehensive_Test.ViewModels;
 
 namespace RTL_Bootstrap_Comprehensive_Test.Controllers
@@ -46,11 +47,32 @@ namespace RTL_Bootstrap_Comprehensive_Test.Controllers
         // POST: PersonController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm] PersonVM submittedPerson)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var personModel = new PersonModel()
+                    {
+                        FirstName = submittedPerson.FirstName,
+                        LastName = submittedPerson.LastName,
+                        EmailAddress = submittedPerson.EmailAddress,
+                    };
+                    var res = new PersonDA().CreatePerson(personModel);
+                    if (res == 1) //  means one row effected. which is created
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
