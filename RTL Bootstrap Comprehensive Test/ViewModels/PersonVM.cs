@@ -22,5 +22,9 @@ namespace RTL_Bootstrap_Comprehensive_Test.ViewModels
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public String EmailAddress { get; set; }
+
+        [Display(Name = "Created On")]
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedOn { get; set; }
     }
 }
