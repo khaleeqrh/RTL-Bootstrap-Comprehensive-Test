@@ -18,10 +18,32 @@ namespace RTL_Bootstrap_Comprehensive_Test.DataAccess
 
         public List<PersonModel> GetPersons()
         {
-            using (IDbConnection cnn = new SQLiteConnection(getConnectionString()))                
+            using (IDbConnection cnn = new SQLiteConnection(getConnectionString()))
             {
                 return cnn.Query<PersonModel>("Select * From person").ToList();
             }
         }
+
+
+        public PersonModel GetPerson(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(getConnectionString()))
+            {
+                return cnn.Query<PersonModel>("Select * From person WHERE Id = @ID", new { ID = id }).FirstOrDefault();
+            }
+        }
+
+
+        public int CreatePerson(PersonModel person)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(getConnectionString()))
+            {
+                return cnn.Execute("INSERT INTO PERSON (FirstName,LastName,EmailAddress) VALUES (@FirstName,@LastName,@EmailAddress)", person);
+            }
+        }
+
+
+
+
     }
 }
