@@ -13,7 +13,7 @@ namespace RTL_Bootstrap_Comprehensive_Test.DataAccess
     {
         public String getConnectionString(String name = "Default")
         {
-            return "";
+            return @"Data Source=./SampleDB.db;Version=3;";
         }
 
         public List<PersonModel> GetPersons()
