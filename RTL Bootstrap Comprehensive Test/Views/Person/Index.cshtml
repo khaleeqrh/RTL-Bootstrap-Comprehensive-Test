@@ -31,7 +31,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -46,7 +47,10 @@
                 @Html.DisplayFor(modelItem => item.EmailAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
+                @{ 
+                    DateTime dt = item.CreatedOn.ToLocalTime();
+                    @Html.DisplayFor(modelItem => dt)
+                }
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id  }) |
